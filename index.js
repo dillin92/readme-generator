@@ -2,8 +2,10 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown');
+const fileContent = process.argv.slice(2, process.argv.length);
 // TODO: Create an array of questions for user input
-inquirer.prompt([
+const promptUser = () =>{ 
+   return inquirer.prompt([
     {
         type: 'input',
         name: 'title',
@@ -17,23 +19,13 @@ inquirer.prompt([
          validate: (value) => {if(value){return true} else {return "Please enter a value to continue"}}
     }
     ])
-    .then((data) => {
-        
-        console.log(data);
-    })
-    .catch((error) => {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log("something else went wrong!");
-        }
-});
+};
 
 // TODO: Create a function to write README file
-function writeToFile (data) {
+const writeToFile = fileContent => {
    return new Promise((resolve, reject) => {
 
-        fs.writeFile('./dist/new-README.md', data, function(err){
+        fs.writeFile('./dist/new-README.md', fileContent, err => {
             if (err) {
                 reject(err);
                 return;
@@ -44,16 +36,26 @@ function writeToFile (data) {
             });
             console.log('Success!');
         });
+      
     });
-}
 
+};
     
-// }
-// // TODO: Create a function to initialize app
-// function init() {
-  
- 
-// };
+promptUser()
+.then(fileContent => {
+    return generateMarkdown(fileContent);
+})
+.then(pageMarkdown => {
+    return writeToFile(pageMarkdown);
+})
+.catch(err => {
+    console.log(err);
+});
 
-// // Function call to initialize app
-// init();
+// //TODO: Create a function to initialize app
+//  function init() {
+//      promptUser();
+//  };
+
+// // // Function call to initialize app
+//   init();
