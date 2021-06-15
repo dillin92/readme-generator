@@ -14,10 +14,55 @@ const promptUser = () =>{
     },
      {
          type: 'input',
-         name: 'installation',
-         message: 'How do you install your application?',
+         name: 'description',
+         message: 'Provide a brief description of your application',
          validate: (value) => {if(value){return true} else {return "Please enter a value to continue"}}
-    }
+    },
+    {
+        type: 'input',
+        name: 'installation',
+        message: 'How do you install your application?',
+        validate: (value) => {if(value){return true} else {return "Please enter a value to continue"}}
+   },
+   {
+    type: 'input',
+    name: 'usage',
+    message: 'How do you use your application?',
+    validate: (value) => {if(value){return true} else {return "Please enter a value to continue"}}
+    },
+    {
+        type: 'input',
+        name: 'contribution',
+        message: 'What are the guidelines to contributing to your application?',
+        validate: (value) => {if(value){return true} else {return "Please enter a value to continue"}}
+    },
+    {
+        type: 'input',
+        name: 'test',
+        message: 'How can you test your application?',
+        validate: (value) => {if(value){return true} else {return "Please enter a value to continue"}}
+    },
+    {
+        type: 'checkbox',
+        name: 'license',
+        message: 'What license are you using?',
+        choices: ['MIT','GPL', 'Apache', 'none'] 
+
+    },
+    {
+        type: 'input',
+        name: 'github',
+        message: 'what is your github username?',
+        validate: (value) => {if(value){return true} else {return "Please enter a value to continue"}}
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: 'what is your email address?',
+        validate: (value) => {if(value){return true} else {return "Please enter a value to continue"}}
+}
+
+
     ])
 };
 
@@ -52,10 +97,4 @@ promptUser()
     console.log(err);
 });
 
-// //TODO: Create a function to initialize app
-//  function init() {
-//      promptUser();
-//  };
 
-// // // Function call to initialize app
-//   init();
